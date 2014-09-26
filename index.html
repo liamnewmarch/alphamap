@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width">
+        <title> Alphamap </title>
+        <link rel="stylesheet" href="main.css">
+    </head>
+    <body>
+        <form>
+            <fieldset>
+                <legend>Base</legend>
+                <label for="base-red">Red</label>
+                <input id="base-red" type="range" min="0" max="255" value="16">
+                <label for="base-green">Green</label>
+                <input id="base-green" type="range" min="0" max="255" value="16">
+                <label for="base-blue">Blue</label>
+                <input id="base-blue" type="range" min="0" max="255" value="16">
+            </fieldset>
+            <fieldset>
+                <legend>Variation</legend>
+                <label for="variation-red">Red</label>
+                <input id="variation-red" type="range" min="0" max="255" value="2">
+                <label for="variation-green">Green</label>
+                <input id="variation-green" type="range" min="0" max="255" value="2">
+                <label for="variation-blue">Blue</label>
+                <input id="variation-blue" type="range" min="0" max="255" value="2">
+            </fieldset>
+        </form>
+        <canvas></canvas>
+        <script src="main.js"></script>
+    </body>
+</html>

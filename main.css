@@ -1,0 +1,31 @@
+* {
+    box-sizing: border-box;
+}
+
+html {
+    font-family: sans-serif;
+    text-rendering: optimizeLegibility;
+    overflow: hidden;
+}
+
+body {
+    margin: 0;
+}
+
+form {
+    position: fixed;
+    top: 0.5em;
+    right: 0.5em;
+    padding: 1em;
+    color: white;
+    background: rgba(0, 0, 0, 0.5);
+}
+
+label {
+    display: block;
+}
+
+input {
+    display: block;
+    margin-bottom: 1em;
+}
