@@ -4,10 +4,6 @@ window.Alphamap = function(options) {
 
     var matrix = [];
 
-    function rgb(r, g, b) {
-        return { r: r, g: g, b: b };
-    }
-
     function newValue(x, y) {
         var top, left, min, average, i;
 
