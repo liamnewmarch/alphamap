@@ -5,16 +5,17 @@ window.Alphamap = function(options) {
     var matrix = [];
 
     function newValue(x, y) {
-        var top, left, min, average, i;
+        var top, left, channel, average, i;
 
         top = y > 0 ? matrix[y - 1][x] : options.baseColor;
         left = x > 0 ? matrix[y][x - 1] : options.baseColor;
-        min = Math.min(left.length, top.length);
 
         average = [];
 
-        for (i = 0; i < min; i++) {
-            average.push((top[i] + left[i]) / 2 + variation(i));
+        for (i = 0; i < 3; i++) {
+			channel = (top[i] + left[i]) / 2 + variation(i);
+			channel = Math.min(255, Math.max(0, channel));
+            average.push(channel);
         }
 
         return average;
