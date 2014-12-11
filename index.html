@@ -1,33 +1,47 @@
 <!DOCTYPE html>
-<html lang="en" dir="ltr">
+<html lang="en" dir="ltr" ng-app="app">
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width">
         <title> Alphamap </title>
-        <link rel="stylesheet" href="main.css">
+        <link rel="stylesheet" href="css/main.css">
     </head>
-    <body>
-        <form>
+    <body ng-controller="ViewController as vm">
+        <form ng-submit="vm.refresh()">
             <fieldset>
                 <legend>Base</legend>
-                <label for="base-red">Red</label>
-                <input id="base-red" type="range" min="0" max="255" value="128">
-                <label for="base-green">Green</label>
-                <input id="base-green" type="range" min="0" max="255" value="128">
-                <label for="base-blue">Blue</label>
-                <input id="base-blue" type="range" min="0" max="255" value="128">
+                <label>
+                    <span>Red</span>
+                    <input type="range" min="0" max="255" ng-model="vm.baseColor[0]">
+                </label>
+                <label>
+                    <span>Green</span>
+                    <input type="range" min="0" max="255" ng-model="vm.baseColor[1]">
+                </label>
+                <label>
+                    <span>Blue</span>
+                    <input type="range" min="0" max="255" ng-model="vm.baseColor[2]">
+                </label>
             </fieldset>
             <fieldset>
                 <legend>Variation</legend>
-                <label for="variation-red">Red</label>
-                <input id="variation-red" type="range" min="0" max="255" value="16">
-                <label for="variation-green">Green</label>
-                <input id="variation-green" type="range" min="0" max="255" value="16">
-                <label for="variation-blue">Blue</label>
-                <input id="variation-blue" type="range" min="0" max="255" value="16">
+                <label>
+                    <span>Red</span>
+                    <input type="range" min="0" max="255" value="16" ng-model="vm.variation[0]">
+                </label>
+                <label>
+                    <span>Green</span>
+                    <input type="range" min="0" max="255" value="16" ng-model="vm.variation[1]">
+                </label>
+                <label>
+                    <span>Blue</span>
+                    <input type="range" min="0" max="255" value="16" ng-model="vm.variation[2]">
+                </label>
             </fieldset>
+            <input type="submit" value="Generate">
         </form>
-        <canvas></canvas>
-        <script src="main.js"></script>
+        <canvas ng-model="vm.canvas"></canvas>
+        <script src="js/angular.min.js"></script>
+        <script src="js/main.js"></script>
     </body>
 </html>
