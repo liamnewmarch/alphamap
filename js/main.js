@@ -3,18 +3,20 @@
 var app = angular.module('app', []);
 
 
-app.controller('ViewController', [ '$scope', function($scope) {
+app.controller('ViewController', [ '$scope', '$timeout', function($scope, $timeout) {
 
     var vm = this;
 
     vm.baseColor = [ 128, 128, 128 ];
     vm.variation = [  16,  16,  16 ];
 
-    vm.refresh = refresh;
-
-    function refresh() {
+    vm.refresh = function() {
         $scope.$broadcast('refresh', vm);
-    }
+    };
+
+    $scope.$watch('vm', function() {
+        vm.refresh();
+    }, true);
 }]);
 
 
@@ -22,9 +24,7 @@ app.directive('canvas', [ 'alphamap', function(alphamap) {
     return {
         restrict: 'E',
         link: function(scope, element, attrs) {
-
             scope.$on('refresh', function(e, data) {
-                console.log('yo');
                 alphamap.create(data);
                 alphamap.draw(element);
             });

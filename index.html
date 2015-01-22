@@ -27,20 +27,20 @@
                 <legend>Variation</legend>
                 <label>
                     <span>Red</span>
-                    <input type="range" min="0" max="255" value="16" ng-model="vm.variation[0]">
+                    <input type="range" min="0" max="255" ng-model="vm.variation[0]">
                 </label>
                 <label>
                     <span>Green</span>
-                    <input type="range" min="0" max="255" value="16" ng-model="vm.variation[1]">
+                    <input type="range" min="0" max="255" ng-model="vm.variation[1]">
                 </label>
                 <label>
                     <span>Blue</span>
-                    <input type="range" min="0" max="255" value="16" ng-model="vm.variation[2]">
+                    <input type="range" min="0" max="255" ng-model="vm.variation[2]">
                 </label>
             </fieldset>
             <input type="submit" value="Generate">
         </form>
-        <canvas ng-model="vm.canvas"></canvas>
+        <canvas></canvas>
         <script src="js/angular.min.js"></script>
         <script src="js/main.js"></script>
     </body>
