@@ -3,7 +3,7 @@
 var app = angular.module('app', []);
 
 
-app.controller('ViewController', [ '$scope', '$timeout', function($scope, $timeout) {
+app.controller('ViewController', [ '$scope', '$timeout', '$window', function($scope, $timeout, $window) {
 
     var vm = this;
 
@@ -11,6 +11,26 @@ app.controller('ViewController', [ '$scope', '$timeout', function($scope, $timeo
     vm.height = 320;
     vm.baseColor = [ 128, 128, 128 ];
     vm.variation = [  16,  16,  16 ];
+    vm.debounce = { debounce: 100 };
+
+    vm.download = function() {
+        $scope.$broadcast('download');
+    };
+
+    vm.fitScreen = function() {
+        vm.width = $window.innerWidth;
+        vm.height = $window.innerHeight;
+        vm.refresh();
+    };
+
+    vm.randomise = function() {
+        vm.baseColor = vm.baseColor.map(function(value) {
+            return Math.floor(Math.random() * 255);
+        });
+        vm.variation = vm.variation.map(function(value) {
+            return Math.floor(Math.random() * 255);
+        });
+    };
 
     vm.refresh = function() {
         $scope.$broadcast('refresh', vm);
@@ -38,12 +58,15 @@ app.directive('canvas', [ 'alphamap', function(alphamap) {
                 alphamap.create(data);
                 alphamap.draw(element);
             });
+            scope.$on('download', function() {
+                alphamap.download(element);
+            });
         }
     };
 }]);
 
 
-app.service('alphamap', [ '$window', function($window) {
+app.service('alphamap', [function() {
 
     var matrix = [],
         options;
@@ -97,6 +120,12 @@ app.service('alphamap', [ '$window', function($window) {
     return {
         create: function(data) {
             options = data;
+        },
+        download: function(element) {
+            var a = document.createElement('a');
+            a.download = 'alphamap.png';
+            a.href = element[0].toDataURL('image/png');
+            a.click();
         },
         draw: function(element) {
             draw(element[0].getContext('2d'));
