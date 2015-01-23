@@ -7,6 +7,8 @@ app.controller('ViewController', [ '$scope', '$timeout', function($scope, $timeo
 
     var vm = this;
 
+    vm.width = 320;
+    vm.height = 320;
     vm.baseColor = [ 128, 128, 128 ];
     vm.variation = [  16,  16,  16 ];
 
@@ -15,6 +17,14 @@ app.controller('ViewController', [ '$scope', '$timeout', function($scope, $timeo
     };
 
     $scope.$watch('vm', function() {
+        vm.width = parseInt(vm.width, 10);
+        vm.height = parseInt(vm.height, 10);
+        vm.baseColor = vm.baseColor.map(function(value) {
+            return parseInt(value);
+        });
+        vm.variation = vm.variation.map(function(value) {
+            return parseInt(value);
+        });
         vm.refresh();
     }, true);
 }]);
@@ -41,8 +51,9 @@ app.service('alphamap', [ '$window', function($window) {
     function draw(context) {
         var x, y, image, imageData, i, width, height;
 
-        width = context.canvas.width = $window.innerWidth;
-        height = context.canvas.height = $window.innerHeight;
+        width = context.canvas.width = options.width;
+        height = context.canvas.height = options.height;
+        context.imageSmoothingEnabled = false;
         image = context.createImageData(width, height);
         imageData = image.data;
 
