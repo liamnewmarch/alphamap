@@ -1,62 +1,14 @@
 <!DOCTYPE html>
-<html lang="en" dir="ltr" ng-app="app">
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width">
-        <title> Alphamap </title>
-        <link rel="stylesheet" href="css/main.css">
-    </head>
-    <body ng-controller="ViewController as vm">
-        <form>
-            <fieldset>
-                <legend>Base</legend>
-                <label>
-                    <span>Width</span>
-                    <input type="range" min="100" max="1000" ng-model="vm.width" ng-model-options="vm.debounce">
-                </label>
-                <label>
-                    <span>Height</span>
-                    <input type="range" min="100" max="1000" ng-model="vm.height" ng-model-options="vm.debounce">
-                </label>
-                <button ng-click="vm.fitScreen()"> Fit to screen</button>
-            </fieldset>
-            <fieldset>
-                <legend>Base</legend>
-                <label>
-                    <span>Red</span>
-                    <input type="range" min="0" max="255" ng-model="vm.baseColor[0]" ng-model-options="vm.debounce">
-                </label>
-                <label>
-                    <span>Green</span>
-                    <input type="range" min="0" max="255" ng-model="vm.baseColor[1]" ng-model-options="vm.debounce">
-                </label>
-                <label>
-                    <span>Blue</span>
-                    <input type="range" min="0" max="255" ng-model="vm.baseColor[2]" ng-model-options="vm.debounce">
-                </label>
-            </fieldset>
-            <fieldset>
-                <legend>Variation</legend>
-                <label>
-                    <span>Red</span>
-                    <input type="range" min="0" max="255" ng-model="vm.variation[0]" ng-model-options="vm.debounce">
-                </label>
-                <label>
-                    <span>Green</span>
-                    <input type="range" min="0" max="255" ng-model="vm.variation[1]" ng-model-options="vm.debounce">
-                </label>
-                <label>
-                    <span>Blue</span>
-                    <input type="range" min="0" max="255" ng-model="vm.variation[2]" ng-model-options="vm.debounce">
-                </label>
-            </fieldset>
-            <button ng-click="vm.randomise()"> Randomise </button>
-            <button ng-click="vm.refresh()"> Regenerate </button>
-            <button ng-click="vm.download()"> Download </button>
-        </form>
-        <canvas></canvas>
-        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular.min.js"></script>
-        <script src="js/main.js"></script>
-        <script async src="https://liamnewmarch.github.io/js/analytics.js"></script>
-    </body>
+<html dir="ltr" lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="initial-scale=1">
+    <title>Alphamap</title>
+    <link rel="stylesheet" href="css/main.css">
+  </head>
+  <body>
+    <x-app></x-app>
+    <script src="js/main.js"></script>
+    <script async src="https://liamnewmarch.github.io/js/analytics.js"></script>
+  </body>
 </html>
