@@ -1,7 +1,9 @@
-const ERR_WORKER_SUPPORT = () => 'this browser does not support Workers.';
-const ERR_CONCURRENCY = (actual, expected) => new Error(
-  `hardware concurrency ${actual} is too low, ${expected} workers are required.`);
-const ERR_WRAPPER = (message) =>  `Oh no! There was an error – ${message}`;
+const ERROR_MESSAGES = {
+  concurrency: (actual, expected) => new Error(`hardware concurrency ${actual}`
+      + ` is too low ${expected} workers are required.`),
+  workerSupport: () => new Error('this browser does not support Workers.'),
+  wrapper: (message) => new Error(`Oh no! There was an error – ${message}`),
+};
 
 class AlphaMap {
   constructor() {
@@ -10,13 +12,17 @@ class AlphaMap {
 
   _createWorkers(workerCount) {
     const concurrency = navigator.hardwareConcurrency || 0;
-    if (!window.Worker) throw ERR_WORKER_SUPPORT();
-    if (concurrency < workerCount) throw ERR_CONCURRENCY(concurrency, workerCount);
+    if (!window.Worker) {
+      throw ERROR_MESSAGES.workerSupport();
+    }
+    if (concurrency < workerCount) {
+      throw ERROR_MESSAGES.concurrency(concurrency, workerCount);
+    }
     return Array(workerCount).fill().map(() => new Worker('js/worker.js'));
   }
 
   _generateChannel(worker, width, height) {
-    return new Promise(resolve => {
+    return new Promise((resolve) => {
       worker.addEventListener('message', (event) => {
         const channelData = new Uint8ClampedArray(event.data.arrayBuffer);
         resolve(channelData);
@@ -55,7 +61,7 @@ customElements.define('x-app', class extends HTMLElement {
       this.update();
       this.addEventListener('click', () => this.update());
     } catch (error) {
-      this.textContent = ERR_WRAPPER(error.message);
+      this.textContent = ERROR_MESSAGES.wrapper(error.message);
     }
   }
 

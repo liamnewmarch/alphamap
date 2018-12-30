@@ -11,7 +11,7 @@ const map = (width, height) => {
   for (let y = 0; y < height; y++) {
     for (let x = 0; x < width; x++) {
       const index = y * width + x;
-      
+
       // 0, 0
       if (x === 0 && y === 0) {
         array[index] = Math.random() * 255;
@@ -24,7 +24,7 @@ const map = (width, height) => {
         array[index] = top + variance(16);
         continue;
       }
-      
+
       // x, 0
       if (y === 0) {
         const left = array[y * width + (x - 1)];
